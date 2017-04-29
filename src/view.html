@@ -1,0 +1,48 @@
+<div class="ng-cloak" ng-controller="MsgServiceCtrl as vm">
+
+  <!-- Message Type -->
+  <div class="form-group">
+    <label>Message Type</label>
+    <ui-select ng-model="vm.msgType.selected"
+               class="btn-group bootstrap-select form-control"
+               ng-disabled="false"
+               append-to-body="true"
+               search-enabled="false">
+      <ui-select-match placeholder="Message Type">
+        <span> {{$select.selected.label}}</span>
+      </ui-select-match>
+      <ui-select-choices repeat="msgType in vm.msgTypes | filter: $select.search">
+        <span ng-bind-html="msgType.label"></span>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+
+  <!-- Recipients -->
+  <div class="form-group">
+    <label>Recipients</label>
+    <ui-select multiple ng-model="vm.recipient.selected"
+             ng-disabled="false"
+             search-enabled="true"
+             append-to-body="true"
+             class="form-control ">
+      <ui-select-match placeholder="Recipients">
+        {{$item.label}}
+      </ui-select-match>
+      <ui-select-choices repeat="recipient in vm.recipients | filter: $select.search">
+        {{recipient.label}}
+      </ui-select-choices>
+    </ui-select>
+  </div>
+
+  <!-- Message -->
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea placeholder="Message" ng-model="vm.message" class="form-control" id="message"></textarea>
+  </div>
+
+  <!-- Send Button -->
+  <div class="form-group">
+    <div class="button-wrapper"><button type="button" class="btn btn-success" ng-click="vm.sendMsg()">Send</button></div>
+  </div>
+
+</div>
